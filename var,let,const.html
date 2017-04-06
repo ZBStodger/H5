@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>js定义变量的三种方法var let const</title>
+</head>
+<body>
+
+	var 在离它最近的父函数内创建了一个变量的作用域 let 在它最近的块级中创建作用于，这些块包括 for 循环， if 语句以及其他块。
+	const 代表一个值的常量索引。换句话说，变量名字在内存中的指针不能够改变，但是指向这个变量的值可能改变。
+
+	1、var定义变量可以修改，如果不初始化会输出undefined，不会报错。
+
+	var a ;
+	console.log(a); //undefined;
+
+	var a = 1;
+	for(var i=0;i<5;i++){
+		var timer = setTimeout(function(){
+			console.log(i);
+		},1000);
+
+		a = 2;
+	}
+	console.log(a)//先打印2，在等1s打印5个5；var声明的变量i，在全局范围内都有效。所以每一次循环，新的i值都会覆盖旧值，导致最后输出的是最后一轮的i的值。
+
+	2、let是块级作用域，函数内部使用let定义后，对函数外部无影响。
+		let c = 3;
+		console.log(c);//输出c=3
+		function change(){
+			let c = 6;
+		    console.log(c);
+		} 
+		change();//输出c=6
+		console.log(c);//输出c=3 
+		for(let i=0;i<5;i++){
+			var timer = setTimeout(function(){
+				console.log(i);
+			},1000);
+		};  //等一秒输出0,1,2,3,4;let声明变量i，当前的i只在本轮循环有效，每一次循环的i其实都是一个新的变量，最后输出的是0,1,2,3,4。
+
+	3、const定义的变量不可以修改，而且必须初始化。
+		const b = 2;//正确
+		// const b;//错误，必须初始化 
+		console.log(b);//有输出值
+		// b = 5; //报错
+		const names = [];
+		names.push("Jordan");
+		console.log(names); //输出["Jordan"];
+		const name = [];
+		name = []; // 报错
+
+</body>
+</html>
